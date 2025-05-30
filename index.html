@@ -1,4 +1,4 @@
-​<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,6 +6,7 @@
     <title>MindScribe | Personal Knowledge Hub</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
     <script>
         tailwind.config = {
             theme: {
@@ -112,25 +113,25 @@
                     <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-2">Personal</h3>
                     <ul>
                         <li class="mb-1">
-                            <a href="#" class="sidebar-hover flex items-center px-3 py-2 rounded-lg bg-primary-600">
+                            <a href="#" class="sidebar-hover flex items-center px-3 py-2 rounded-lg bg-primary-600" data-view="dashboard">
                                 <i class="fas fa-home mr-3"></i>
                                 Dashboard
                             </a>
                         </li>
                         <li class="mb-1">
-                            <a href="#" class="sidebar-hover flex items-center px-3 py-2 rounded-lg">
+                            <a href="#" class="sidebar-hover flex items-center px-3 py-2 rounded-lg" data-view="notes">
                                 <i class="fas fa-sticky-note mr-3"></i>
                                 My Notes
                             </a>
                         </li>
                         <li class="mb-1">
-                            <a href="#" class="sidebar-hover flex items-center px-3 py-2 rounded-lg">
+                            <a href="#" class="sidebar-hover flex items-center px-3 py-2 rounded-lg" data-view="tasks">
                                 <i class="fas fa-tasks mr-3"></i>
                                 Tasks & Todos
                             </a>
                         </li>
                         <li class="mb-1">
-                            <a href="#" class="sidebar-hover flex items-center px-3 py-2 rounded-lg">
+                            <a href="#" class="sidebar-hover flex items-center px-3 py-2 rounded-lg" data-view="bookmarks">
                                 <i class="fas fa-bookmark mr-3"></i>
                                 Bookmarks
                             </a>
@@ -142,19 +143,19 @@
                     <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-2">Organization</h3>
                     <ul>
                         <li class="mb-1">
-                            <a href="#" class="sidebar-hover flex items-center px-3 py-2 rounded-lg">
+                            <a href="#" class="sidebar-hover flex items-center px-3 py-2 rounded-lg" data-view="projects">
                                 <i class="fas fa-folder mr-3"></i>
                                 Projects
                             </a>
                         </li>
                         <li class="mb-1">
-                            <a href="#" class="sidebar-hover flex items-center px-3 py-2 rounded-lg">
+                            <a href="#" class="sidebar-hover flex items-center px-3 py-2 rounded-lg" data-view="team">
                                 <i class="fas fa-users mr-3"></i>
                                 Team
                             </a>
                         </li>
                         <li class="mb-1">
-                            <a href="#" class="sidebar-hover flex items-center px-3 py-2 rounded-lg">
+                            <a href="#" class="sidebar-hover flex items-center px-3 py-2 rounded-lg" data-view="calendar">
                                 <i class="fas fa-calendar mr-3"></i>
                                 Calendar
                             </a>
@@ -166,19 +167,19 @@
                     <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-2">Settings</h3>
                     <ul>
                         <li class="mb-1">
-                            <a href="#" class="sidebar-hover flex items-center px-3 py-2 rounded-lg">
+                            <a href="#" class="sidebar-hover flex items-center px-3 py-2 rounded-lg" data-view="preferences">
                                 <i class="fas fa-cog mr-3"></i>
                                 Preferences
                             </a>
                         </li>
                         <li class="mb-1">
-                            <a href="#" class="sidebar-hover flex items-center px-3 py-2 rounded-lg">
+                            <a href="#" class="sidebar-hover flex items-center px-3 py-2 rounded-lg" data-view="security">
                                 <i class="fas fa-shield-alt mr-3"></i>
                                 Security
                             </a>
                         </li>
                         <li class="mb-1">
-                            <a href="#" class="sidebar-hover flex items-center px-3 py-2 rounded-lg">
+                            <a href="#" class="sidebar-hover flex items-center px-3 py-2 rounded-lg" data-view="support">
                                 <i class="fas fa-life-ring mr-3"></i>
                                 Support
                             </a>
@@ -233,7 +234,7 @@
                     <button class="p-2 rounded-full hover:bg-gray-100 text-gray-600">
                         <i class="fas fa-envelope"></i>
                     </button>
-                    <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded-lg flex items-center">
+                    <button id="new-note-btn" class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded-lg flex items-center">
                         <i class="fas fa-plus mr-2"></i> New Note
                     </button>
                 </div>
@@ -384,7 +385,7 @@
                                     </div>
                                 </div>
                                 
-                                <button class="w-full mt-4 text-center text-primary-600 hover:text-primary-800 text-sm font-medium">
+                                <button id="add-task-btn" class="w-full mt-4 text-center text-primary-600 hover:text-primary-800 text-sm font-medium">
                                     <i class="fas fa-plus mr-1"></i> Add New Task
                                 </button>
                             </div>
@@ -579,7 +580,7 @@
                             </div>
                             
                             <div class="px-5 py-4 border-t border-gray-200">
-                                <button class="w-full py-3 rounded-lg border border-dashed border-gray-300 text-gray-500 hover:text-gray-700 hover:border-gray-400">
+                                <button id="create-note-btn" class="w-full py-3 rounded-lg border border-dashed border-gray-300 text-gray-500 hover:text-gray-700 hover:border-gray-400">
                                     <i class="fas fa-plus mr-2"></i> Create New Note
                                 </button>
                             </div>
@@ -605,6 +606,27 @@
             </div>
         </div>
     </div>
+    
+    <!-- JavaScript Files -->
+    <script src="js/utils.js"></script>
+    <script src="js/notes.js"></script>
+    <script src="js/tasks.js"></script>
+    <script src="js/calendar.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/app.js"></script>
+    
+    <script>
+        // Initialize the application when the DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize managers
+            notesManager.init();
+            tasksManager.init();
+            calendarManager.init();
+            
+            // Initialize UI
+            uiManager.init();
+        });
+    </script>
 </body>
 </html>
   
