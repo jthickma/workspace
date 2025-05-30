@@ -1,0 +1,611 @@
+​<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindScribe | Personal Knowledge Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        secondary: {
+                            50: '#f5f3ff',
+                            100: '#ede9fe',
+                            200: '#ddd6fe',
+                            300: '#c4b5fd',
+                            400: '#a78bfa',
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                            700: '#6d28d9',
+                            800: '#5b21b6',
+                            900: '#4c1d95',
+                        },
+                        dark: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .note-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .sidebar-hover:hover {
+            background-color: rgba(124, 58, 237, 0.1);
+        }
+        
+        .progress-gradient {
+            background: linear-gradient(90deg, #8b5cf6 0%, #0ea5e9 100%);
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(30, 41, 59, 0.05);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: rgba(124, 58, 237, 0.5);
+            border-radius: 3px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #7c3aed;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 overflow-hidden">
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <div class="w-64 bg-gradient-to-b from-dark-800 to-dark-900 text-white flex flex-col">
+            <!-- Brand -->
+            <div class="p-5 flex items-center border-b border-dark-700">
+                <div class="w-10 h-10 rounded-lg bg-primary-600 flex items-center justify-center">
+                    <i class="fas fa-brain text-white text-xl"></i>
+                </div>
+                <div class="ml-3">
+                    <h1 class="text-xl font-bold">MindScribe</h1>
+                    <p class="text-xs opacity-75">Knowledge Hub</p>
+                </div>
+            </div>
+            
+            <!-- Navigation -->
+            <div class="p-4 flex-1 overflow-y-auto">
+                <div class="mb-6">
+                    <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-2">Personal</h3>
+                    <ul>
+                        <li class="mb-1">
+                            <a href="#" class="sidebar-hover flex items-center px-3 py-2 rounded-lg bg-primary-600">
+                                <i class="fas fa-home mr-3"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="mb-1">
+                            <a href="#" class="sidebar-hover flex items-center px-3 py-2 rounded-lg">
+                                <i class="fas fa-sticky-note mr-3"></i>
+                                My Notes
+                            </a>
+                        </li>
+                        <li class="mb-1">
+                            <a href="#" class="sidebar-hover flex items-center px-3 py-2 rounded-lg">
+                                <i class="fas fa-tasks mr-3"></i>
+                                Tasks & Todos
+                            </a>
+                        </li>
+                        <li class="mb-1">
+                            <a href="#" class="sidebar-hover flex items-center px-3 py-2 rounded-lg">
+                                <i class="fas fa-bookmark mr-3"></i>
+                                Bookmarks
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="mb-6">
+                    <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-2">Organization</h3>
+                    <ul>
+                        <li class="mb-1">
+                            <a href="#" class="sidebar-hover flex items-center px-3 py-2 rounded-lg">
+                                <i class="fas fa-folder mr-3"></i>
+                                Projects
+                            </a>
+                        </li>
+                        <li class="mb-1">
+                            <a href="#" class="sidebar-hover flex items-center px-3 py-2 rounded-lg">
+                                <i class="fas fa-users mr-3"></i>
+                                Team
+                            </a>
+                        </li>
+                        <li class="mb-1">
+                            <a href="#" class="sidebar-hover flex items-center px-3 py-2 rounded-lg">
+                                <i class="fas fa-calendar mr-3"></i>
+                                Calendar
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="mb-6">
+                    <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-2">Settings</h3>
+                    <ul>
+                        <li class="mb-1">
+                            <a href="#" class="sidebar-hover flex items-center px-3 py-2 rounded-lg">
+                                <i class="fas fa-cog mr-3"></i>
+                                Preferences
+                            </a>
+                        </li>
+                        <li class="mb-1">
+                            <a href="#" class="sidebar-hover flex items-center px-3 py-2 rounded-lg">
+                                <i class="fas fa-shield-alt mr-3"></i>
+                                Security
+                            </a>
+                        </li>
+                        <li class="mb-1">
+                            <a href="#" class="sidebar-hover flex items-center px-3 py-2 rounded-lg">
+                                <i class="fas fa-life-ring mr-3"></i>
+                                Support
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="p-3 bg-dark-800 rounded-lg mt-16">
+                    <h3 class="text-sm font-medium mb-2">Storage Usage</h3>
+                    <div class="w-full bg-gray-700 rounded-full h-2 mb-2">
+                        <div class="progress-gradient h-2 rounded-full" style="width: 45%"></div>
+                    </div>
+                    <p class="text-xs text-gray-400">2.7GB of 5GB used</p>
+                </div>
+            </div>
+            
+            <!-- User Profile -->
+            <div class="p-4 border-t border-dark-700">
+                <div class="flex items-center">
+                    <img src="https://ui-avatars.com/api/?name=Alex+Smith&background=7c3aed&color=fff" alt="User" class="w-10 h-10 rounded-full">
+                    <div class="ml-3 flex-1">
+                        <h3 class="font-semibold">Alex Smith</h3>
+                        <p class="text-xs text-gray-400">alex@example.com</p>
+                    </div>
+                    <button class="text-gray-400 hover:text-white">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- Top Bar -->
+            <div class="bg-white border-b border-gray-200 p-4 flex justify-between items-center">
+                <div class="relative w-1/3">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <i class="fas fa-search text-gray-400"></i>
+                    </div>
+                    <input 
+                        type="text" 
+                        placeholder="Search notes, tasks, and knowledge..." 
+                        class="w-full pl-10 pr-4 py-2 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    >
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <button class="p-2 rounded-full hover:bg-gray-100 text-gray-600 relative">
+                        <i class="fas fa-bell"></i>
+                        <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+                    </button>
+                    <button class="p-2 rounded-full hover:bg-gray-100 text-gray-600">
+                        <i class="fas fa-envelope"></i>
+                    </button>
+                    <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded-lg flex items-center">
+                        <i class="fas fa-plus mr-2"></i> New Note
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Content -->
+            <div class="flex-1 overflow-y-auto p-6">
+                <!-- Dashboard Header -->
+                <div class="mb-8">
+                    <div class="flex justify-between items-center mb-2">
+                        <h2 class="text-2xl font-bold text-dark-900">Knowledge Dashboard</h2>
+                        <div class="flex space-x-2">
+                            <button class="bg-white border border-gray-200 px-3 py-1 rounded-lg text-sm hover:bg-gray-50">
+                                Today
+                            </button>
+                            <button class="bg-white border border-gray-200 px-3 py-1 rounded-lg text-sm hover:bg-gray-50">
+                                This Week
+                            </button>
+                            <button class="bg-primary-500 text-white px-3 py-1 rounded-lg text-sm hover:bg-primary-600">
+                                Custom View
+                            </button>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">Welcome back, Alex! You have 3 new tasks and 5 updated notes</p>
+                </div>
+                
+                <!-- Stats -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-white rounded-xl p-5 border border-gray-200">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-lg font-semibold">Notes</h3>
+                                <p class="text-3xl font-bold mt-1">142</p>
+                            </div>
+                            <div class="p-3 rounded-lg bg-blue-100 text-blue-600">
+                                <i class="fas fa-sticky-note text-xl"></i>
+                            </div>
+                        </div>
+                        <div class="mt-4 text-sm flex items-center text-green-600">
+                            <i class="fas fa-arrow-up mr-1"></i> 12% since last week
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl p-5 border border-gray-200">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-lg font-semibold">Tasks</h3>
+                                <p class="text-3xl font-bold mt-1">24</p>
+                            </div>
+                            <div class="p-3 rounded-lg bg-purple-100 text-purple-600">
+                                <i class="fas fa-tasks text-xl"></i>
+                            </div>
+                        </div>
+                        <div class="mt-4 text-sm flex items-center text-blue-600">
+                            <i class="fas fa-circle mr-1 text-xs"></i> 5 overdue tasks
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl p-5 border border-gray-200">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-lg font-semibold">Bookmarks</h3>
+                                <p class="text-3xl font-bold mt-1">87</p>
+                            </div>
+                            <div class="p-3 rounded-lg bg-green-100 text-green-600">
+                                <i class="fas fa-bookmark text-xl"></i>
+                            </div>
+                        </div>
+                        <div class="mt-4 text-sm flex items-center text-gray-600">
+                            <i class="fas fa-eye mr-1"></i> 7 viewed today
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl p-5 border border-gray-200">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-lg font-semibold">Projects</h3>
+                                <p class="text-3xl font-bold mt-1">5</p>
+                            </div>
+                            <div class="p-3 rounded-lg bg-yellow-100 text-yellow-600">
+                                <i class="fas fa-folder text-xl"></i>
+                            </div>
+                        </div>
+                        <div class="mt-4 text-sm flex items-center text-green-600">
+                            <i class="fas fa-check-circle mr-1"></i> 2 completed
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Content Layout -->
+                <div class="flex flex-col lg:flex-row lg:space-x-6">
+                    <!-- Left Column (Tasks & Calendar) -->
+                    <div class="lg:w-1/3 mb-6 lg:mb-0">
+                        <!-- Tasks Widget -->
+                        <div class="bg-white rounded-xl border border-gray-200 mb-6 overflow-hidden">
+                            <div class="border-b border-gray-200 px-5 py-4 flex justify-between items-center">
+                                <h3 class="font-semibold">Pending Tasks</h3>
+                                <button class="text-primary-600 text-sm font-medium">View All</button>
+                            </div>
+                            
+                            <div class="p-5">
+                                <!-- Task items -->
+                                <div class="mb-4 pb-4 border-b border-gray-100">
+                                    <div class="flex">
+                                        <div class="flex items-center h-5">
+                                            <input type="checkbox" class="rounded text-primary-600 focus:ring-primary-500">
+                                        </div>
+                                        <div class="ml-3 text-sm flex-1">
+                                            <label class="font-medium">Complete research for client proposal</label>
+                                            <div class="mt-1 flex items-center text-xs text-gray-500">
+                                                <i class="fas fa-calendar-alt mr-1"></i> Today, 4:00 PM
+                                            </div>
+                                        </div>
+                                        <div class="flex">
+                                            <span class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded">High</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-4 pb-4 border-b border-gray-100">
+                                    <div class="flex">
+                                        <div class="flex items-center h-5">
+                                            <input type="checkbox" class="rounded text-primary-600 focus:ring-primary-500">
+                                        </div>
+                                        <div class="ml-3 text-sm flex-1">
+                                            <label class="font-medium">Schedule team meeting for Q2 planning</label>
+                                            <div class="mt-1 flex items-center text-xs text-gray-500">
+                                                <i class="fas fa-calendar-alt mr-1"></i> Tomorrow
+                                            </div>
+                                        </div>
+                                        <div class="flex">
+                                            <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded">Medium</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <div class="flex">
+                                        <div class="flex items-center h-5">
+                                            <input type="checkbox" class="rounded text-primary-600 focus:ring-primary-500" checked>
+                                        </div>
+                                        <div class="ml-3 text-sm flex-1">
+                                            <label class="font-medium text-gray-400 line-through">Update expense reports</label>
+                                            <div class="mt-1 flex items-center text-xs text-gray-400">
+                                                <i class="fas fa-calendar-alt mr-1"></i> Yesterday
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <button class="w-full mt-4 text-center text-primary-600 hover:text-primary-800 text-sm font-medium">
+                                    <i class="fas fa-plus mr-1"></i> Add New Task
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Calendar Widget -->
+                        <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+                            <div class="border-b border-gray-200 px-5 py-4">
+                                <h3 class="font-semibold">Upcoming Events</h3>
+                            </div>
+                            
+                            <div class="p-5">
+                                <div class="text-center mb-4">
+                                    <div class="flex justify-between items-center mb-3">
+                                        <button class="text-gray-500 hover:text-gray-700">
+                                            <i class="fas fa-chevron-left"></i>
+                                        </button>
+                                        <h4 class="font-medium">November 2023</h4>
+                                        <button class="text-gray-500 hover:text-gray-700">
+                                            <i class="fas fa-chevron-right"></i>
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="grid grid-cols-7 gap-1 mb-2">
+                                        <div class="text-xs font-medium text-gray-500 py-1">Sun</div>
+                                        <div class="text-xs font-medium text-gray-500 py-1">Mon</div>
+                                        <div class="text-xs font-medium text-gray-500 py-1">Tue</div>
+                                        <div class="text-xs font-medium text-gray-500 py-1">Wed</div>
+                                        <div class="text-xs font-medium text-gray-500 py-1">Thu</div>
+                                        <div class="text-xs font-medium text-gray-500 py-1">Fri</div>
+                                        <div class="text-xs font-medium text-gray-500 py-1">Sat</div>
+                                    </div>
+                                    
+                                    <div class="grid grid-cols-7 gap-1 text-sm">
+                                        <!-- Calendar days go here -->
+                                        <div class="py-1 text-gray-300">29</div>
+                                        <div class="py-1 text-gray-300">30</div>
+                                        <div class="py-1 text-gray-300">31</div>
+                                        <div class="py-1">1</div>
+                                        <div class="py-1">2</div>
+                                        <div class="py-1">3</div>
+                                        <div class="py-1">4</div>
+                                        <div class="py-1">5</div>
+                                        <div class="py-1">6</div>
+                                        <div class="py-1">7</div>
+                                        <div class="py-1">8</div>
+                                        <div class="py-1">9</div>
+                                        <div class="py-1">10</div>
+                                        <div class="py-1">11</div>
+                                        <div class="py-1">12</div>
+                                        <div class="py-1">13</div>
+                                        <div class="py-1 bg-primary-100 rounded-full text-white">14</div>
+                                        <div class="py-1">15</div>
+                                        <div class="py-1">16</div>
+                                        <div class="py-1">17</div>
+                                        <div class="py-1">18</div>
+                                        <div class="py-1">19</div>
+                                        <div class="py-1">20</div>
+                                        <div class="py-1">21</div>
+                                        <div class="py-1">22</div>
+                                        <div class="py-1">23</div>
+                                        <div class="py-1">24</div>
+                                        <div class="py-1">25</div>
+                                        <div class="py-1">26</div>
+                                        <div class="py-1">27</div>
+                                        <div class="py-1">28</div>
+                                        <div class="py-1">29</div>
+                                        <div class="py-1">30</div>
+                                        <div class="py-1 text-gray-300">1</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-4">
+                                    <h4 class="text-sm font-medium mb-2">Today's Events</h4>
+                                    <div class="border-l-2 border-primary-500 pl-3 pb-2">
+                                        <div class="text-sm font-medium">Team Meeting</div>
+                                        <div class="text-xs text-gray-500">2:00 PM - 3:30 PM</div>
+                                    </div>
+                                    <div class="border-l-2 border-purple-500 pl-3 pt-2">
+                                        <div class="text-sm font-medium">Project Deadline</div>
+                                        <div class="text-xs text-gray-500">6:00 PM</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Column (Notes Section) -->
+                    <div class="lg:w-2/3">
+                        <div class="bg-white rounded-xl border border-gray-200">
+                            <div class="border-b border-gray-200 px-5 py-4 flex justify-between items-center">
+                                <h3 class="font-semibold">Recent Notes</h3>
+                                <div class="flex space-x-2">
+                                    <button class="p-2 rounded-lg hover:bg-gray-100">
+                                        <i class="fas fa-filter text-gray-500"></i>
+                                    </button>
+                                    <button class="p-2 rounded-lg hover:bg-gray-100">
+                                        <i class="fas fa-sort text-gray-500"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Note Cards -->
+                            <div class="p-5 grid grid-cols-1 md:grid-cols-2 gap-5">
+                                <!-- Note Card 1 -->
+                                <div class="note-card bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-100 rounded-xl p-5 transition-all duration-300">
+                                    <div class="flex justify-between items-start mb-3">
+                                        <div>
+                                            <span class="inline-block px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded mb-2">Research</span>
+                                            <h4 class="font-semibold">Web Development Trends 2024</h4>
+                                        </div>
+                                        <div class="p-2 rounded-lg bg-white shadow">
+                                            <i class="fas fa-file-alt text-blue-500"></i>
+                                        </div>
+                                    </div>
+                                    <p class="text-sm text-gray-600 mb-4">Exploration of emerging frameworks, tools, and methodologies that will shape frontend development in the coming year...</p>
+                                    <div class="flex justify-between text-xs text-gray-500">
+                                        <div>
+                                            <i class="fas fa-clock mr-1"></i> Updated 2 hours ago
+                                        </div>
+                                        <div class="flex items-center">
+                                            <i class="fas fa-tag mr-1"></i> Tech, Trends
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Note Card 2 -->
+                                <div class="note-card bg-gradient-to-br from-purple-50 to-purple-100 border border-purple-100 rounded-xl p-5 transition-all duration-300">
+                                    <div class="flex justify-between items-start mb-3">
+                                        <div>
+                                            <span class="inline-block px-2 py-1 text-xs font-medium bg-purple-100 text-purple-800 rounded mb-2">Meeting</span>
+                                            <h4 class="font-semibold">Q2 Marketing Strategy</h4>
+                                        </div>
+                                        <div class="p-2 rounded-lg bg-white shadow">
+                                            <i class="fas fa-chart-line text-purple-500"></i>
+                                        </div>
+                                    </div>
+                                    <p class="text-sm text-gray-600 mb-4">Notes from the leadership meeting discussing marketing initiatives, budget allocations, and campaign timelines...</p>
+                                    <div class="flex justify-between text-xs text-gray-500">
+                                        <div>
+                                            <i class="fas fa-clock mr-1"></i> Updated yesterday
+                                        </div>
+                                        <div class="flex items-center">
+                                            <i class="fas fa-tag mr-1"></i> Marketing
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Note Card 3 -->
+                                <div class="note-card bg-gradient-to-br from-green-50 to-green-100 border border-green-100 rounded-xl p-5 transition-all duration-300">
+                                    <div class="flex justify-between items-start mb-3">
+                                        <div>
+                                            <span class="inline-block px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded mb-2">Personal</span>
+                                            <h4 class="font-semibold">Book Club Reading List</h4>
+                                        </div>
+                                        <div class="p-2 rounded-lg bg-white shadow">
+                                            <i class="fas fa-book text-green-500"></i>
+                                        </div>
+                                    </div>
+                                    <p class="text-sm text-gray-600 mb-4">Curated selection of novels for monthly book club meetings with ratings and discussion points for each title...</p>
+                                    <div class="flex justify-between text-xs text-gray-500">
+                                        <div>
+                                            <i class="fas fa-clock mr-1"></i> Updated 5 days ago
+                                        </div>
+                                        <div class="flex items-center">
+                                            <i class="fas fa-tag mr-1"></i> Reading
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Note Card 4 -->
+                                <div class="note-card bg-gradient-to-br from-yellow-50 to-yellow-100 border border-yellow-100 rounded-xl p-5 transition-all duration-300">
+                                    <div class="flex justify-between items-start mb-3">
+                                        <div>
+                                            <span class="inline-block px-2 py-1 text-xs font-medium bg-yellow-100 text-yellow-800 rounded mb-2">Project</span>
+                                            <h4 class="font-semibold">Mobile App UI Design System</h4>
+                                        </div>
+                                        <div class="p-2 rounded-lg bg-white shadow">
+                                            <i class="fas fa-mobile-alt text-yellow-500"></i>
+                                        </div>
+                                    </div>
+                                    <p class="text-sm text-gray-600 mb-4">Complete UI documentation for the company's flagship mobile application covering colors, typography and components...</p>
+                                    <div class="flex justify-between text-xs text-gray-500">
+                                        <div>
+                                            <i class="fas fa-clock mr-1"></i> Updated 3 days ago
+                                        </div>
+                                        <div class="flex items-center">
+                                            <i class="fas fa-tag mr-1"></i> Design, UI
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="px-5 py-4 border-t border-gray-200">
+                                <button class="w-full py-3 rounded-lg border border-dashed border-gray-300 text-gray-500 hover:text-gray-700 hover:border-gray-400">
+                                    <i class="fas fa-plus mr-2"></i> Create New Note
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Daily Insights -->
+                        <div class="bg-gradient-to-r from-primary-500 to-secondary-600 rounded-xl p-5 mt-6 text-white shadow-lg">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="font-bold text-lg mb-2">Daily Insight</h3>
+                                    <p class="mb-4 max-w-lg">Your knowledge base has grown by 17% this week. Consider organizing your newest entries into collections to enhance discoverability.</p>
+                                    <button class="bg-white text-primary-600 py-2 px-4 rounded-lg font-medium hover:bg-opacity-90">
+                                        View Progress
+                                    </button>
+                                </div>
+                                <div class="text-4xl opacity-25">
+                                    <i class="fas fa-lightbulb"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+  
+
